@@ -30,7 +30,10 @@ fn main() {
     let email = read_string();
     println!("Insert user password: ");
     let password = read_string();
-    let password = hash_password(&password);
+    let password = match hash_password(&password) {
+        Some(password) => password,
+        None => return
+    };
 
     let user = match create_user(&connection, &name, &email, &date, &time) {
         Some(user) => {
